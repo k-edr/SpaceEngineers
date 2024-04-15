@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GyroGPS", "GyroGPS\GyroGPS.csproj", "{31B9CD4E-6E1F-4B01-8EB0-C0AD1C1CB19A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPS Guided Air Surface Torpedo", "GPS Guided Air Surface Torpedo\GPS Guided Air Surface Torpedo.csproj", "{C234D6A4-8521-41EE-8B74-DE26E6EE9437}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Guided Torpedo", "Guided Torpedo\Guided Torpedo.csproj", "{FD878495-F8AB-45AB-877B-5B261C34BBC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LidarRadar", "LidarRadar\LidarRadar.csproj", "{60DF7094-AB39-4277-88DD-2037536658B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_Template", "_Template\_Template.csproj", "{D476DFD7-7F73-477A-9AC8-027484244C1F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{31B9CD4E-6E1F-4B01-8EB0-C0AD1C1CB19A}.Debug|x64.ActiveCfg = Debug|x64
+		{31B9CD4E-6E1F-4B01-8EB0-C0AD1C1CB19A}.Debug|x64.Build.0 = Debug|x64
+		{C234D6A4-8521-41EE-8B74-DE26E6EE9437}.Debug|x64.ActiveCfg = Debug|x64
+		{C234D6A4-8521-41EE-8B74-DE26E6EE9437}.Debug|x64.Build.0 = Debug|x64
+		{FD878495-F8AB-45AB-877B-5B261C34BBC1}.Debug|x64.ActiveCfg = Debug|x64
+		{FD878495-F8AB-45AB-877B-5B261C34BBC1}.Debug|x64.Build.0 = Debug|x64
+		{60DF7094-AB39-4277-88DD-2037536658B7}.Debug|x64.ActiveCfg = Debug|x64
+		{60DF7094-AB39-4277-88DD-2037536658B7}.Debug|x64.Build.0 = Debug|x64
+		{D476DFD7-7F73-477A-9AC8-027484244C1F}.Debug|x64.ActiveCfg = Debug|x64
+		{D476DFD7-7F73-477A-9AC8-027484244C1F}.Debug|x64.Build.0 = Debug|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DDF95A3C-536D-4ACD-B440-C08BE01441A3}
+	EndGlobalSection
+EndGlobal

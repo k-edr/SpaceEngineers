@@ -39,6 +39,7 @@
   <Import Project="MDK/MDK.paths.props" Condition="exists('MDK/MDK.paths.props')" />
   <ItemGroup>
     <Compile Include="Custom\Helpers\AutoTag.cs" />
+    <Compile Include="ITemplate.cs" />
     <Compile Include="MDK\Bootstrapper.cs" />
     <Compile Include="Custom\Logger\BaseLogger.cs" />
     <Compile Include="Custom\CustomProgram.cs" />

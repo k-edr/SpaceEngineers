@@ -36,13 +36,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Custom\Const\Constants.cs" />
-    <Compile Include="Custom\Logger\BaseLogger.cs" />
-    <Compile Include="Custom\Logger\IAddable.cs" />
-    <Compile Include="Custom\Logger\ILogger.cs" />
-    <Compile Include="Custom\Logger\PanelLogger.cs" />
-    <Compile Include="Custom\MyGridSystem\MyGrid.cs" />
-    <Compile Include="Custom\StuffProgram.cs" />
     <Compile Include="MDK\Bootstrapper.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
@@ -65,6 +58,7 @@
   <ItemGroup>
     <AdditionalFiles Include="thumb.png" />
   </ItemGroup>
+  <Import Project="..\_TemplateMixin\_TemplateMixin.projitems" Label="Shared" />
   <Import Project="MDK/MDK.options.props" />
   <Import Project="MDK/MDK.paths.props" Condition="exists('MDK/MDK.paths.props')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

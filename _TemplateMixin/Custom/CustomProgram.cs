@@ -49,15 +49,15 @@ namespace IngameScript
             }
             catch (Exception ex)
             {
-                Logger.Add($"Got Exception: {ex}");
+                Logger.AddLine($"Got Exception: {ex}");
 
                 if (Constants.RESTART_SCRIPT_AFTER_EXCEPTION)
                 {
-                    Logger.Add($"\nRestarting the script");
+                    Logger.AddLine($"\nRestarting the script");
                 }
                 else
                 {
-                    Logger.Add($"\nThe script execution is stoped");
+                    Logger.AddLine($"\nThe script execution is stoped");
 
                     Runtime.UpdateFrequency = UpdateFrequency.None;
                 }

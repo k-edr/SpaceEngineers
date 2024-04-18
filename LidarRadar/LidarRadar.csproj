@@ -36,6 +36,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\Lidar.cs" />
+    <Compile Include="Controllers\LidarController.cs" />
+    <Compile Include="Models\LidarModel.cs" />
+    <Compile Include="Views\LidarView.cs" />
     <Compile Include="MDK\Bootstrapper.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>

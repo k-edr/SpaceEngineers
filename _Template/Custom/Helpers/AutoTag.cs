@@ -9,17 +9,25 @@ namespace IngameScript.Custom.Heplers
 {
     public class AutoTag
     {
-        public static void AddTagToBlockCustomeName(string tag, IMyTerminalBlock block)
+        public static void AddToBlockCustomeName(string tag, IMyTerminalBlock block)
         {
-            block.CustomName = string.Concat(tag, block.CustomName);
+            if (!HaveTag(tag, block))
+            {
+                block.CustomName = string.Concat(tag, block.CustomName);
+            }
         }
 
-        public static void AddTagToBlocksCustomeName(string tag, ICollection<IMyTerminalBlock> blocks)
+        public static void AddToBlocksCustomeName(string tag, ICollection<IMyTerminalBlock> blocks)
         {
             foreach (var block in blocks)
             {
-                AddTagToBlockCustomeName(tag, block);
+                AddToBlockCustomeName(tag, block);
             }
+        }
+
+        private static bool HaveTag(string tag, IMyTerminalBlock block)
+        {
+            return block.CustomName.Contains(tag);
         }
     }
 }

@@ -33,9 +33,9 @@ namespace IngameScript.MyGridSystem
             return GridBlocks.FirstOrDefault(block => block.EntityId == id);
         }
 
-        public void GetBlocksOfType<T>(List<T> list) where T : IMyTerminalBlock
+        public void GetBlocksOfType<T>(List<T> list)
         {
-            list = GridBlocks.Select(x => x).Where(x => x is T).ToList() as List<T>;
+            list = GridBlocks.Select(x => x).Where(x => x.GetType() == typeof(T)).ToList() as List<T>;
         }
     }
 }

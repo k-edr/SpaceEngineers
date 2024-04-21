@@ -23,7 +23,7 @@ namespace IngameScript
             _runtimeInfo = runtimeInfo;
         }
 
-        public void TryLock(int scanDistanceLimit = 20000)
+        public virtual void TryLock(int scanDistanceLimit = 20000)
         {
             if(!IsDetectedEntity)
             {
@@ -44,7 +44,7 @@ namespace IngameScript
             }
         }
 
-        public void ResetRadar()
+        public virtual void ResetRadar()
         {
             _lastDetectedEntity = default(MyDetectedEntityInfo);
         }

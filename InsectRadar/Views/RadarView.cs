@@ -1,7 +1,7 @@
 ﻿using Sandbox.ModAPI.Ingame;
 using System.Linq;
 
-namespace IngameScript
+namespace IngameScript.Views
 {
     public class RadarView
     {

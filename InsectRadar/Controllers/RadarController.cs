@@ -1,4 +1,7 @@
-﻿namespace IngameScript
+﻿using IngameScript.Models;
+using IngameScript.Views;
+
+namespace IngameScript.Controllers
 {
     public class RadarController
     {

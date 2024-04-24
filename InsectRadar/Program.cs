@@ -1,4 +1,8 @@
-﻿using IngameScript.Custom;
+﻿using IngameScript.Controllers;
+using IngameScript.Custom;
+using IngameScript.Models;
+using IngameScript.Services;
+using IngameScript.Views;
 using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI.Ingame;
 using Sandbox.ModAPI.Interfaces;
@@ -23,11 +27,12 @@ namespace IngameScript
     partial class Program : MyGridProgram, ITemplate
     {
 
-        RadarController RadarController;
+        MyltiTargetRadarController MyltiTargetRadarController;
+        ScanPlot scanPlot;
 
         public void Init()
         {
-            Runtime.UpdateFrequency = UpdateFrequency.Update10;
+            Runtime.UpdateFrequency = UpdateFrequency.Update1;
 
             var cameras = new List<IMyCameraBlock>();
 
@@ -37,18 +42,20 @@ namespace IngameScript
 
             temp.Where(x => x is IMyCameraBlock).ToList().ForEach((val) => { cameras.Add(val as IMyCameraBlock); });
 
-            var scanPlot = new ScanPlot(Logger, cameras);
+            scanPlot = new ScanPlot(Logger, cameras);
 
             Logger.AddLine($"Inited plot {Config.Get("Grid", "RadarPlot1")}");
             Logger.AddLine($"Inited plot cameras. Total inited: {cameras.Count} cameras");
 
-            RadarController = new RadarController(
-                new RadarModel() { Radar = new Radar(scanPlot, Runtime) }, 
-                new RadarView(GridBlocks.GetBlockWithName(Config.Get("Grid", "RadarDisplay").ToString()) as IMyTextPanel));
+            MyltiTargetRadarController = new MyltiTargetRadarController(
+                new MultiTargetRadarModel() { Radar = new MultiTargetRadar(scanPlot, Runtime) }, 
+                new MultiTargetRadarView(GridBlocks.GetBlockWithName(Config.Get("Grid", "RadarDisplay").ToString()) as IMyTextPanel));
 
         }
 
         bool tryScan = false;
+        bool tryLockNewTarget = false;
+        bool newTargetIsLocked = false;
 
         public void Execute(string argument, UpdateType updateSource)
         {
@@ -63,9 +70,12 @@ namespace IngameScript
                         tryScan = false;
                         break;
                     case "ResetRadar":
-                        RadarController.ResetRadar();
+                        MyltiTargetRadarController.ResetRadar();
                         tryScan = false;
-
+                        break;
+                    case "TryLockNewTarget":
+                        tryLockNewTarget = true;
+                        newTargetIsLocked = false;
                         break;
                     default:
                         throw new ArgumentException("Unknown argument", argument);
@@ -74,9 +84,18 @@ namespace IngameScript
 
             if (tryScan)
             {
-                RadarController.TryLock();
-                RadarController.Show();
+                MyltiTargetRadarController.TryLock();
+                MyltiTargetRadarController.Show();
 
+                Logger.AddLine("Range " + scanPlot.GetTotalAvailableRange);
+            }
+            if (tryLockNewTarget)
+            {
+                MyltiTargetRadarController.TryLockNewTarget(ref newTargetIsLocked);
+                if (newTargetIsLocked)
+                {
+                    tryLockNewTarget = false;
+                }
             }
         }
 

@@ -1,18 +1,18 @@
 ﻿using Sandbox.ModAPI.Ingame;
 using System;
-using System.Collections.Generic;
 
-namespace IngameScript
+namespace IngameScript.Services
 {
+
     public class Radar
     {
-        private ScanPlot _plot;
+        protected ScanPlot _plot;
 
-        private IMyGridProgramRuntimeInfo _runtimeInfo;
+        protected IMyGridProgramRuntimeInfo _runtimeInfo;
 
         public MyDetectedEntityInfo _lastDetectedEntity { get; protected set; } = default(MyDetectedEntityInfo);
 
-        public bool IsDetectedEntity => _lastDetectedEntity.EntityId != 0;
+        private bool IsDetectedEntity => _lastDetectedEntity.EntityId != 0;
 
         public Radar(ScanPlot plot, IMyGridProgramRuntimeInfo runtimeInfo)
         {

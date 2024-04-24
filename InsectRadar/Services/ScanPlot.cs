@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using VRageMath;
 
-namespace IngameScript
+namespace IngameScript.Services
 {
     public class ScanPlot
     {

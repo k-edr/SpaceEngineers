@@ -1,4 +1,6 @@
-﻿namespace IngameScript
+﻿using IngameScript.Services;
+
+namespace IngameScript.Models
 {
     public class RadarModel
     {

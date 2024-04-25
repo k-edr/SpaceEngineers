@@ -1,4 +1,5 @@
 ﻿using IngameScript.Custom;
+using IngameScript.UnitTesting;
 using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI.Ingame;
 using Sandbox.ModAPI.Interfaces;
@@ -21,16 +22,33 @@ using VRageMath;
 
 namespace IngameScript
 {
+
+    
     partial class Program : MyGridProgram, ITemplate
     {
-        public void Execute(string argument, UpdateType updateSource)
-        {
-            throw new NotImplementedException();
-        }
-
+        TestExecutor TestExecutor;
         public void Init()
         {
-            throw new NotImplementedException();
+            Runtime.UpdateFrequency = UpdateFrequency.Update10;
+
+            var collector = new TestCollector();
+            collector.Add(new MyTests());
+
+            Logger.AddLine(string.Join(" ", collector.GetTests()));
+
+            TestExecutor = new TestExecutor(collector.GetTests(),Echo);
+        }
+        public void Execute(string argument, UpdateType updateSource)
+        {
+            TestExecutor.ExecuteNext();
+
+            if(argument == "ShowResults")
+            {
+                foreach (var item in TestExecutor.TestsResult)
+                {
+                    Logger.Add(item._summary.Get());
+                }
+            }
         }
     }
 }

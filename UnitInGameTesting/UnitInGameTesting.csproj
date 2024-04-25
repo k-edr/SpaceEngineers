@@ -38,6 +38,9 @@
   <Import Project="MDK/MDK.options.props" />
   <Import Project="MDK/MDK.paths.props" Condition="exists('MDK/MDK.paths.props')" />
   <ItemGroup>
+    <Compile Include="Assert.cs" />
+    <Compile Include="BaseTestClass.cs" />
+    <Compile Include="Is.cs" />
     <Compile Include="MDK\Bootstrapper.cs" />
     <AdditionalFiles Include="MDK\MDK.options.props">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -45,10 +48,16 @@
     <AdditionalFiles Include="MDK\MDK.paths.props">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AdditionalFiles>
+    <Compile Include="MyTests.cs" />
     <Compile Include="Program.cs" />
     <AdditionalFiles Include="Instructions.readme" />
     <AdditionalFiles Include="thumb.png" />
     <AdditionalFiles Include="MDK\whitelist.cache" />
+    <Compile Include="TestCollector.cs" />
+    <Compile Include="UnitTesting\AssertionSummary.cs" />
+    <Compile Include="UnitTesting\Test.cs" />
+    <Compile Include="UnitTesting\TestExecutor.cs" />
+    <Compile Include="UnitTesting\TestStatus.cs" />
   </ItemGroup>
   <Import Project="..\_TemplateMixin\_TemplateMixin.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

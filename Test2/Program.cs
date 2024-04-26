@@ -1,83 +1,372 @@
-﻿using Sandbox.Game.EntityComponents;
+﻿using IngameScript.Custom;
 using Sandbox.ModAPI.Ingame;
-using Sandbox.ModAPI.Interfaces;
-using SpaceEngineers.Game.ModAPI.Ingame;
 using System;
-using System.Collections;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
+using System.Reflection;
 using System.Text;
-using VRage;
-using VRage.Collections;
-using VRage.Game;
-using VRage.Game.Components;
-using VRage.Game.GUI.TextPanel;
-using VRage.Game.ModAPI.Ingame;
-using VRage.Game.ModAPI.Ingame.Utilities;
-using VRage.Game.ObjectBuilders.Definitions;
-using VRageMath;
 
 namespace IngameScript
 {
-    partial class Program : MyGridProgram
+    class TestBuilder
     {
-        // This file contains your actual script.
-        //
-        // You can either keep all your code here, or you can create separate
-        // code files to make your program easier to navigate while coding.
-        //
-        // In order to add a new utility class, right-click on your project, 
-        // select 'New' then 'Add Item...'. Now find the 'Space Engineers'
-        // category under 'Visual C# Items' on the left hand side, and select
-        // 'Utility Class' in the main area. Name it in the box below, and
-        // press OK. This utility class will be merged in with your code when
-        // deploying your final script.
-        //
-        // You can also simply create a new utility class manually, you don't
-        // have to use the template if you don't want to. Just do so the first
-        // time to see what a utility class looks like.
-        // 
-        // Go to:
-        // https://github.com/malware-dev/MDK-SE/wiki/Quick-Introduction-to-Space-Engineers-Ingame-Scripts
-        //
-        // to learn more about ingame scripts.
+        private readonly Test _test = new Test();
 
-        public Program()
+        public TestBuilder AddMethod(Action method)
         {
-            // The constructor, called only once every session and
-            // always before any other method is called. Use it to
-            // initialize your script. 
-            //     
-            // The constructor is optional and can be removed if not
-            // needed.
-            // 
-            // It's recommended to set Runtime.UpdateFrequency 
-            // here, which will allow your script to run itself without a 
-            // timer block.
+            if (method == null) throw new ArgumentException("Argument can't be null", nameof(method));
+
+            _test.Method = method;
+
+            return this;
         }
 
-        public void Save()
+        public TestBuilder AddName(string name)
         {
-            // Called when the program needs to save its state. Use
-            // this method to save your state to the Storage field
-            // or some other means. 
-            // 
-            // This method is optional and can be removed if not
-            // needed.
+            if (name == null || name == string.Empty) throw new ArgumentException("Argument can't be null or empty", nameof(name));
+
+            _test.Name = name;
+
+            return this;
         }
 
-        public void Main(string argument, UpdateType updateSource)
+        public Test Create() => _test;
+    }
+
+    enum TestStatus
+    {
+        Not_Executed,
+        Failed,
+        Passed
+    }
+
+    class Test
+    {
+
+        public Action Method;
+
+        public string Name;
+    }
+
+    public abstract class BaseTestClass
+    {
+        private List<Action> actions = new List<Action>();
+
+        protected internal void AddMethod(Action action) => actions.Add(action);
+
+        internal Action[] GetMethods() => actions.ToArray();
+    }
+
+    class TestClassContainer
+    {
+        private List<BaseTestClass> classes = new List<BaseTestClass>();
+
+        public void Add(BaseTestClass testClass)
         {
-            // The main entry point of the script, invoked every time
-            // one of the programmable block's Run actions are invoked,
-            // or the script updates itself. The updateSource argument
-            // describes where the update came from. Be aware that the
-            // updateSource is a  bitfield  and might contain more than 
-            // one update type.
-            // 
-            // The method itself is required, but the arguments above
-            // can be removed if not needed.
+            NullThrow(testClass);
+
+            classes.Add(testClass);
+        }
+
+        public bool Remove(BaseTestClass testClass)
+        {
+            NullThrow(testClass);
+
+            return classes.Remove(testClass);
+        }
+
+        public bool Contains(BaseTestClass testClass)
+        {
+            NullThrow(testClass);
+
+            return classes.Contains(testClass);
+        }
+
+        public BaseTestClass[] Get() => classes.ToArray();
+
+        private static void NullThrow(BaseTestClass testClass)
+        {
+            if (testClass == null) throw new ArgumentException("Argument can't be null", nameof(testClass));
+        }
+    }
+
+    class ExecuteResult
+    {
+        public Test Test { get; set; }
+
+        public TestStatus Status { get; set; } = TestStatus.Not_Executed;
+
+        public Exception Exception { get; set; } = null;
+    }
+
+    class TestExecutor
+    {
+        public virtual ExecuteResult[] Execute(params Test[] tests)
+        {
+            var results = new ExecuteResult[tests.Length];
+            int index = 0;
+
+            foreach (var test in tests)
+            {
+                try
+                {
+                    test.Method.Invoke();
+                }
+                catch (Exception ex)
+                {
+                    results[index++] = new ExecuteResult()
+                    {
+                        Test = test,
+                        Status = TestStatus.Failed,
+                        Exception = ex
+                    };
+
+                    continue;
+                }
+
+                results[index++] = new ExecuteResult()
+                {
+                    Test = test,
+                    Status = TestStatus.Passed,
+                };
+            }
+
+            return results;
+        }
+    }
+
+    class Summary
+    {
+        public string Text { get; set; }
+    }
+
+    class SummaryBuilder
+    {
+        private readonly Summary _summary = new Summary();
+
+        private readonly StringBuilder _sb = new StringBuilder();
+
+        public SummaryBuilder AddName(string name)
+        {
+            if (name == null) throw new ArgumentException("Argument can't be null", nameof(name));
+
+            _sb.AppendLine("Test name:" + name);
+
+            return this;
+        }
+
+        public SummaryBuilder AddTestStatus(TestStatus status)
+        {
+            _sb.AppendLine("Execution status: " + status.ToString());
+
+            return this;
+        }
+
+        public SummaryBuilder AddException(Exception exception)
+        {
+            if (exception == null) throw new ArgumentException("Argument can't be null", nameof(exception));
+
+            _sb.AppendLine("Got exception: " + exception.ToString());
+
+            return this;
+        }
+
+        public SummaryBuilder AddDescription(string description)
+        {
+            if (description == null) throw new ArgumentException("Argument can't be null", nameof(description));
+
+            _sb.AppendLine("Description: " + description);
+
+            return this;
+        }
+
+        public Summary Create()
+        {
+            _summary.Text = _sb.ToString();
+
+            return _summary;
+        }
+    }
+
+    class TestingEngine
+    {
+        private TestClassContainer _container;
+
+        private TestExecutor _executor = new TestExecutor();
+
+
+        public TestingEngine(TestClassContainer container)
+        {
+            _container = container;
+        }
+
+        private ExecuteResult[] TestAll(params Test[] tests)
+        {
+            return _executor.Execute(tests);
+        }
+
+        public Summary[] GetSummaries(params ExecuteResult[] results)
+        {
+            var summaries = new List<Summary>();
+
+            foreach (var result in results)
+            {
+                var builder = new SummaryBuilder();
+
+                builder.AddName(result.Test.Name).AddTestStatus(result.Status);
+
+                if (result.Status == TestStatus.Failed)
+                {
+                    builder.AddException(result.Exception);
+                }
+
+                summaries.Add(builder.Create());
+            }
+
+            return summaries.ToArray();
+        }
+
+        public Test[] GetTests()
+        {
+            var tests = new List<Test>();
+
+            foreach (var testClass in _container.Get())
+            {
+                foreach (var method in testClass.GetMethods())
+                {
+                    tests.Add(new TestBuilder().AddMethod(method).AddName(method.Method.Name).Create());
+                }
+            }
+
+            return tests.ToArray();
+        }
+
+        public Summary[] RunEngine()
+        {
+            var tests = GetTests();
+
+            var results = TestAll(tests);
+
+            var summaries = GetSummaries(results);
+
+            return summaries;
+        }
+    }
+
+    class AssertArgumentEqualsException : Exception
+    {
+        public AssertArgumentEqualsException(string message) : base(message)
+        {
+        }
+    }
+
+    class AssertActionException : Exception
+    {
+        public AssertActionException(string message) : base(message)
+        {
+        }
+    }
+
+
+    static class Is
+    {
+        public static bool True => true;
+
+        public static bool False => false;
+
+        public static bool IsType<T>(object obj)
+        {
+            return obj is T;
+        }
+    }
+    static class Assert
+    {     
+        public static void To<T>(T original, T expected)
+        {
+            if (!original.Equals(expected))
+            {
+                throw new AssertArgumentEqualsException($"Arguments aren't equals. " +
+                    $"\n{nameof(original)}: [{original}] " +
+                    $"\n{nameof(expected)}: [{expected}]");
+            }
+        }
+
+        public static void To<T>(T[] original, T[] expected)
+        {
+            if (!Enumerable.SequenceEqual(original, expected))
+            {
+                throw new AssertArgumentEqualsException($"Arguments aren't equals. " +
+                    $"\n{nameof(original)}: [{string.Join(" ", original)}] " +
+                    $"\n{nameof(expected)}: [{string.Join(" ", expected)}]");
+            }
+        }
+
+        public static void To<T>(Action action, T exception) where T : Exception
+        {
+            try
+            {
+                action.Invoke();
+            }
+            catch (T ex)
+            {
+                return;
+            }
+            catch (Exception ex)
+            {
+                throw new AssertArgumentEqualsException($"Arguments aren't equals. \nGot: {ex}. \nException: {exception}");
+            }
+
+            throw new AssertActionException($"Action don't produce any exception. \nAction: {action.Method.Name}. \nException: {exception}");
+        }
+    }
+
+    class MyTestClass : BaseTestClass
+    {
+        public MyTestClass()
+        {
+            AddMethod(IsTrueTest_True);
+            AddMethod(IsFalseTest_True);
+        }
+
+        public void IsTrueTest_True()
+        {
+            bool b = true;
+
+            Assert.To(b, Is.True);
+        }
+
+        public void IsFalseTest_True()
+        {
+            bool b = false;
+
+            Assert.To(b, Is.True);
+        }
+    }
+
+    partial class Program : MyGridProgram, ITemplate
+    {
+        TestingEngine Engine;
+
+        public void Init()
+        {
+            TestClassContainer container = new TestClassContainer();
+            container.Add(new MyTestClass());
+
+            Engine = new TestingEngine(container);
+        }
+
+        public void Execute(string argument, UpdateType updateSource)
+        {
+            if(argument == "Testing")
+            {
+                var summaries = Engine.RunEngine();
+
+                foreach (var summary in summaries)
+                {
+                    Logger.AddLine(summary.Text);
+                }
+            }
         }
     }
 }

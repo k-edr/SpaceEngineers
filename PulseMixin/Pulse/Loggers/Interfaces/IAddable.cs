@@ -1,4 +1,4 @@
-﻿namespace IngameScript.IngameScript.Pulse.Loggers
+﻿namespace IngameScript.IngameScript.Pulse.Loggers.Interfaces
 {
     public interface IAddable
     {

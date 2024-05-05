@@ -38,12 +38,18 @@
   <Import Project="MDK/MDK.options.props" />
   <Import Project="MDK/MDK.paths.props" Condition="exists('MDK/MDK.paths.props')" />
   <ItemGroup>
+    <Compile Include="IngameScript\Pulse\PulseInfo.cs" />
+    <Compile Include="IngameScript\Pulse\Services\AutoTag.cs" />
     <Compile Include="IngameScript\Pulse\Constants\Constant.cs" />
     <Compile Include="IngameScript\ITemplateProgram.cs" />
     <Compile Include="IngameScript\PartialProgram.cs" />
+    <Compile Include="IngameScript\Pulse\Loggers\PlugLogger.cs" />
     <Compile Include="IngameScript\Pulse\Loggers\Interfaces\IAddable.cs" />
     <Compile Include="IngameScript\Pulse\Loggers\Interfaces\ILogger.cs" />
     <Compile Include="IngameScript\Pulse\Loggers\PanelLogger.cs" />
+    <Compile Include="IngameScript\Pulse\Services\SwitchStockpile.cs" />
+    <Compile Include="IngameScript\Pulse\Services\SwitchToggle.cs" />
+    <Compile Include="IngameScript\Pulse\Services\ThrustersOverride.cs" />
     <Compile Include="MDK\Bootstrapper.cs" />
     <AdditionalFiles Include="MDK\MDK.options.props">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

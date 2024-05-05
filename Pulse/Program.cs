@@ -11,6 +11,7 @@ namespace IngameScript
     {
         public void Init()
         {
+            Runtime.UpdateFrequency = UpdateFrequency.Update10;
         }
 
         public void Execute(string argument, UpdateType updateSource)

@@ -362,3 +362,7 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /Test
+/AA Turrets System
+/AutoTag
+/Guided Torpedo 2
+/ConsoleApp1

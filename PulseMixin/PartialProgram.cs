@@ -18,12 +18,20 @@ namespace IngameScript
 
         public readonly Dictionary<string, Action<string>> TerminalTriggerArgumentActions = new Dictionary<string, Action<string>>();
 
+        public readonly IMyTerminalBlock[] MyGridBlocks;
+
         public Program()
         {
             Config = new MyIni();
             if (!Config.TryParse(Me.CustomData)) throw new ArgumentException("Can't parse config." + Me.CustomData);
 
             Tag = Config.Get("Grid", "Tag").ToString();
+
+            var tempList = new List<IMyTerminalBlock>();
+
+            GridTerminalSystem.SearchBlocksOfName(Tag, tempList);
+
+            MyGridBlocks = tempList.ToArray();
 
             var panel = GridTerminalSystem.GetBlockWithName(Tag + Config.Get("Grid", "LogPanel").ToString()) as IMyTextPanel;
 

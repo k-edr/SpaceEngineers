@@ -1,4 +1,4 @@
-﻿using IngameScript.PulseTesting;
+﻿using IngameScript.PulseTesting.Models;
 
 namespace IngameScript.PulseTesting.Interfaces
 {

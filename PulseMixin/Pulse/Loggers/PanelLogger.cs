@@ -1,4 +1,5 @@
 ﻿using Sandbox.ModAPI.Ingame;
+using IngameScript.IngameScript.Pulse.Loggers.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

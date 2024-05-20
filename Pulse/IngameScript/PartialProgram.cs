@@ -10,13 +10,13 @@ namespace IngameScript
 {   
     partial class Program: MyGridProgram
     {
-        public readonly PanelLogger Logger;
+        public PanelLogger Logger;
 
-        public readonly MyIni Config;
+        public MyIni Config;
 
-        public readonly string Tag;
+        public string Tag;
 
-        public readonly Dictionary<string, Action<string>> TerminalTriggerArgumentActions = new Dictionary<string, Action<string>>();
+        public Dictionary<string, Action<string>> TerminalTriggerArgumentActions = new Dictionary<string, Action<string>>();
 
         public Program()
         {
@@ -84,6 +84,7 @@ namespace IngameScript
                     string tag = argument.Split(';')[1];
                     AutoTag.Remove(tag, blocks.ToArray());
                 });
+
         }
 
         private void RestartAfterException()

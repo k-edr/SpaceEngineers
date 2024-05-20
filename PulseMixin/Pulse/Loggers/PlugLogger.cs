@@ -1,4 +1,6 @@
-﻿namespace IngameScript.IngameScript.Pulse.Loggers
+﻿using IngameScript.IngameScript.Pulse.Loggers.Interfaces;
+
+namespace IngameScript.IngameScript.Pulse.Loggers
 {
     public class PlugLogger : ILogger
     {

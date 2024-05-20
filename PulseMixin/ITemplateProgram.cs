@@ -6,7 +6,7 @@ namespace IngameScript
     {
         void Init();
 
-        void Execute(string argument, UpdateType updateSource);    
+        void Execute(string argument, UpdateType updateSource);
     }
 
 }

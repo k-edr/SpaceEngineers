@@ -5,20 +5,21 @@ using Sandbox.ModAPI.Ingame;
 using System;
 using System.Collections.Generic;
 using VRage.Game.ModAPI.Ingame.Utilities;
+using IngameScript.IngameScript.Pulse.Loggers.Interfaces;
 
 namespace IngameScript 
 {   
     partial class Program: MyGridProgram
     {
-        public readonly PanelLogger Logger;
+        public ILogger Logger;
 
-        public readonly MyIni Config;
+        public MyIni Config;
 
-        public readonly string Tag;
+        public string Tag;
 
-        public readonly Dictionary<string, Action<string>> TerminalTriggerArgumentActions = new Dictionary<string, Action<string>>();
+        public Dictionary<string, Action<string>> TerminalTriggerArgumentActions = new Dictionary<string, Action<string>>();
 
-        public readonly IMyTerminalBlock[] MyGridBlocks;
+        public IMyTerminalBlock[] MyGridBlocks;
 
         public Program()
         {
@@ -33,11 +34,9 @@ namespace IngameScript
 
             MyGridBlocks = tempList.ToArray();
 
-            var panel = GridTerminalSystem.GetBlockWithName(Tag + Config.Get("Grid", "LogPanel").ToString()) as IMyTextPanel;
+            //var panel = GridTerminalSystem.GetBlockWithName(Tag + Config.Get("Grid", "LogPanel").ToString()) as IMyTextPanel;
 
-            Logger = new PanelLogger(panel);
-
-            Logger.Clear();
+            Logger = new PlugLogger();
 
             AddDictionaryActions();
 
@@ -50,8 +49,14 @@ namespace IngameScript
 
             try
             {
-                if (updateSource == UpdateType.Terminal || updateSource == UpdateType.Trigger)
+                if (argument.Equals(string.Empty) || argument == null) 
                 {
+                    Execute(argument, updateSource);
+                    return;
+                }
+
+                if (updateSource == UpdateType.Terminal || updateSource == UpdateType.Trigger)
+                {                  
                     var arr = argument.Split(';');
 
                     Action<string> action;
@@ -60,10 +65,6 @@ namespace IngameScript
                     Logger.AddLine($"Execute command: {arr[0]}\nArgument: {argument}");
 
                     action.Invoke(argument);
-                }
-                else
-                {
-                    Execute(argument, updateSource);
                 }
             }
             catch (Exception ex)
@@ -92,6 +93,7 @@ namespace IngameScript
                     string tag = argument.Split(';')[1];
                     AutoTag.Remove(tag, blocks.ToArray());
                 });
+
         }
 
         private void RestartAfterException()

@@ -11,6 +11,7 @@ namespace IngameScript.PulseTesting.Models
 
         public IEnumerable<TestMethod> Methods => _methods;
 
+
         #region add args
         public virtual void Add(Action action) => _methods.Add(new TestMethod(action.Method.Name, this.GetType().Name, action));
 

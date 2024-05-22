@@ -10,17 +10,7 @@ using System.Threading.Tasks;
 namespace IngameScript.PulseTesting.Services
 {
     public class TestReportMaker : ITestReportMaker
-    {
-        private string _startReportFrom = string.Empty;
-
-        private string _endReportWith = string.Empty;
-
-        public TestReportMaker(string startReportFrom = "", string endReportWith="")
-        {
-            _startReportFrom = startReportFrom;
-            _endReportWith = endReportWith;
-        }
-
+    {       
 
         //TODO: extract base result
         protected virtual string FormBadResult(TestResult result)
@@ -33,11 +23,14 @@ namespace IngameScript.PulseTesting.Services
             return $"\t Method name:{result.MethodName},\n\t Class name:{result.ClassName},\n\t Test status:{result.Status},\n\tExecuted for: {DateTime.FromBinary(result.ExecuteTime).Millisecond}ms";
         }
 
-        public virtual string Make(string resultSeparator, params TestResult[] results)
+        public virtual string Make(string resultSeparator, string startReportFrom = "", string endReportWith = "", params TestResult[] results)
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine(_startReportFrom);
+            if (!startReportFrom.Equals(string.Empty))
+            {
+                sb.AppendLine(startReportFrom);
+            }
 
             sb.AppendLine(FormStatistics(results));
 
@@ -49,7 +42,10 @@ namespace IngameScript.PulseTesting.Services
                 sb.AppendLine((testResult.Status ? FormGoodResult(testResult) : FormBadResult(testResult)) + resultSeparator);
             }
 
-            sb.AppendLine(_endReportWith);
+            if (!endReportWith.Equals(string.Empty))
+            {
+                sb.AppendLine(endReportWith);
+            }
 
             return sb.ToString();
         }

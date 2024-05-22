@@ -9,6 +9,9 @@
     <Import_RootNamespace>IngameScript</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)PulseTesting\Assertion\Assert.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PulseTesting\Assertion\Exceptions\AssertionArgumentException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PulseTesting\Assertion\Exceptions\AssertionNotThrownException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PulseTesting\Interfaces\ITest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PulseTesting\Interfaces\ITestClass.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PulseTesting\Interfaces\ITestingEngine.cs" />
@@ -18,5 +21,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)PulseTesting\Models\TestResult.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PulseTesting\Services\TestingEngine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PulseTesting\Services\TestReportMaker.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PulseTesting\Testing\PulseDemoTests.cs" />
   </ItemGroup>
 </Project>

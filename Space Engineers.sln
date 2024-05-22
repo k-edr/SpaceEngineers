@@ -77,8 +77,6 @@ Global
 		SolutionGuid = {DDF95A3C-536D-4ACD-B440-C08BE01441A3}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		_TemplateMixin\_TemplateMixin.projitems*{350fe8e0-24f2-4c43-927c-be85ba5f6595}*SharedItemsImports = 4
-		_TemplateMixin\_TemplateMixin.projitems*{5c2c285a-452c-41c6-97b3-f5fce6d9af4b}*SharedItemsImports = 4
 		_TemplateMixin\_TemplateMixin.projitems*{61eba249-19f3-48b6-a25b-a4cee90168ba}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

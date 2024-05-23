@@ -1,11 +1,11 @@
-using IngameScript.IngameScript.Pulse.Template.Services;
-using IngameScript.IngameScript.Pulse.Template.Loggers;
+using IngameScript.Pulse.Template.Services;
+using IngameScript.Pulse.Logging.Services;
 using IngameScript.Pulse.Template.Constants;
 using Sandbox.ModAPI.Ingame;
 using System;
 using System.Collections.Generic;
 using VRage.Game.ModAPI.Ingame.Utilities;
-using IngameScript.IngameScript.Pulse.Template.Loggers.Interfaces;
+using IngameScript.Pulse.Logging.Interfaces;
 
 namespace IngameScript 
 {   

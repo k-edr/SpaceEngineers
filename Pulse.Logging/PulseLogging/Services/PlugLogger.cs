@@ -1,6 +1,6 @@
-﻿using IngameScript.IngameScript.Pulse.Template.Loggers.Interfaces;
+﻿using IngameScript.Pulse.Logging.Interfaces;
 
-namespace IngameScript.Pulse.Template.Loggers
+namespace IngameScript.Pulse.Logging.Services
 {
     public class PlugLogger : ILogger
     {

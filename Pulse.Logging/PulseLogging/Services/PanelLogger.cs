@@ -1,12 +1,12 @@
-﻿using Sandbox.ModAPI.Ingame;
-using IngameScript.IngameScript.Pulse.Template.Loggers.Interfaces;
+﻿using IngameScript.Pulse.Logging.Interfaces;
+using Sandbox.ModAPI.Ingame;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IngameScript.Pulse.Template.Loggers
+namespace IngameScript.Pulse.Logging.Services
 {
     public class PanelLogger : ILogger
     {

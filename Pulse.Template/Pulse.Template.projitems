@@ -12,10 +12,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)PulseTemplate\ITemplateProgram.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PulseTemplate\PartialProgram.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PulseTemplate\Constants\Constant.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PulseTemplate\Loggers\Interfaces\IAddable.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PulseTemplate\Loggers\Interfaces\ILogger.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PulseTemplate\Loggers\PanelLogger.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PulseTemplate\Loggers\PlugLogger.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PulseTemplate\PulseInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PulseTemplate\Services\AutoTag.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PulseTemplate\Services\SwitchStockpile.cs" />

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IngameScript.Pulse.Template.Loggers.Interfaces
+namespace IngameScript.Pulse.Logging.Interfaces
 {
 
     public interface ILogger:IAddable

@@ -1,7 +1,7 @@
-﻿using IngameScript.PulseTesting;
-using IngameScript.PulseTesting.Models;
+﻿using IngameScript.Pulse.Testing;
+using IngameScript.Pulse.Testing.Models;
 
-namespace IngameScript.PulseTesting.Interfaces
+namespace IngameScript.Pulse.Testing.Interfaces
 {
     public interface ITestReportMaker
     {

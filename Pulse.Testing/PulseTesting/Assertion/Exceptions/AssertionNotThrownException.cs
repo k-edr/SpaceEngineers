@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IngameScript.PulseTesting.Assertion.Exceptions
+namespace IngameScript.Pulse.Testing.Assertion.Exceptions
 {
     public class AssertionNotThrownException : Exception
     {

@@ -1,6 +1,6 @@
-﻿using IngameScript.PulseTesting.Models;
+﻿using IngameScript.Pulse.Testing.Models;
 
-namespace IngameScript.PulseTesting.Interfaces
+namespace IngameScript.Pulse.Testing.Interfaces
 {
     public interface ITestingEngine
     {

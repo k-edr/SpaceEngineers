@@ -1,11 +1,11 @@
-﻿using IngameScript.PulseTesting.Assertion.Exceptions;
+﻿using IngameScript.Pulse.Testing.Assertion.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IngameScript.PulseTesting.Assertion
+namespace IngameScript.Pulse.Testing.Assertion
 {
     public static class Assert
     {

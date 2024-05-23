@@ -1,13 +1,13 @@
-﻿using IngameScript.PulseTesting;
-using IngameScript.PulseTesting.Interfaces;
-using IngameScript.PulseTesting.Models;
+﻿using IngameScript.Pulse.Testing;
+using IngameScript.Pulse.Testing.Interfaces;
+using IngameScript.Pulse.Testing.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IngameScript.PulseTesting.Services
+namespace IngameScript.Pulse.Testing.Services
 {
     public class TestReportMaker : ITestReportMaker
     {       

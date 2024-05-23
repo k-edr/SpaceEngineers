@@ -1,4 +1,4 @@
-﻿namespace IngameScript.PulseTesting.Models
+﻿namespace IngameScript.Pulse.Testing.Models
 {
     public class TestResult
     {

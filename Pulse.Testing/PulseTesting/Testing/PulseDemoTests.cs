@@ -1,8 +1,8 @@
-﻿using IngameScript.PulseTesting.Assertion;
-using IngameScript.PulseTesting.Models;
+﻿using IngameScript.Pulse.Testing.Assertion;
+using IngameScript.Pulse.Testing.Models;
 using System;
 
-namespace IngameScript.PulseTesting.Testing
+namespace IngameScript.Pulse.Testing.Testing
 {
     class PulseDemoTests :TestClass
     {

@@ -1,10 +1,10 @@
-﻿using IngameScript.PulseTesting;
-using IngameScript.PulseTesting.Models;
+﻿using IngameScript.Pulse.Testing;
+using IngameScript.Pulse.Testing.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace IngameScript.PulseTesting.Interfaces
+namespace IngameScript.Pulse.Testing.Interfaces
 {
     public interface ITestClass
     {

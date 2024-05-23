@@ -1,11 +1,11 @@
-﻿using IngameScript.PulseTesting.Interfaces;
-using IngameScript.PulseTesting.Models;
+﻿using IngameScript.Pulse.Testing.Interfaces;
+using IngameScript.Pulse.Testing.Models;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
-namespace IngameScript.PulseTesting.Services
+namespace IngameScript.Pulse.Testing.Services
 {
     public class TestingEngine:ITestingEngine
     {

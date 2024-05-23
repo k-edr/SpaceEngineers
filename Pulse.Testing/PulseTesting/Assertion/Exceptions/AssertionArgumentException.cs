@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IngameScript.PulseTesting.Assertion.Exceptions
+namespace IngameScript.Pulse.Testing.Assertion.Exceptions
 {
     class AssertionArgumentException<T> : ArgumentException
     {
